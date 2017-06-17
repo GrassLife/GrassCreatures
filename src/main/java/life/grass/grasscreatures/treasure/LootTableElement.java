@@ -3,7 +3,7 @@ package life.grass.grasscreatures.treasure;
 /**
  * Created by ecila on 2017/06/18.
  */
-public class LootListElement {
+public class LootTableElement {
     private String itemName;
     private int ratio;
 
