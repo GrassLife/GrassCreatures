@@ -1,7 +1,11 @@
 package life.grass.grasscreatures.creature;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import net.minecraft.server.v1_12_R1.EntityLiving;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
+import org.bukkit.craftbukkit.v1_12_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 
 /**
@@ -62,6 +66,10 @@ public class LeveledCreature {
         if(entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE) != null) {
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue() + (level - 1) / 4);
         }
+        JsonObject json = new JsonObject();
+        json.addProperty("level", level);
+        json.addProperty("name", name);
+        entity.addScoreboardTag(new Gson().toJson(json));
     }
 
     public String buildName() {
