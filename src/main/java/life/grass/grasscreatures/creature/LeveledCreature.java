@@ -17,7 +17,6 @@ public class LeveledCreature {
     private LeveledCreature(LivingEntity entity, int level) {
         this.entity = entity;
         this.level = level;
-        this.name = entity.getName();
         setupEntity();
     }
 
@@ -26,6 +25,10 @@ public class LeveledCreature {
         this.level = level;
         this.name = name;
         setupEntity();
+    }
+
+    public static LeveledCreature generate(LivingEntity entity, LevelRange range, String name) {
+        return new LeveledCreature(entity, range.getRandomLevel(), name);
     }
 
     public static LeveledCreature generate(LivingEntity entity, LevelRange range) {
@@ -42,6 +45,10 @@ public class LeveledCreature {
 
     public int getLevel() {
         return level;
+    }
+
+    public String getDisplayName() {
+        return name != null ? name : entity.getName();
     }
 
     public ChatColor getLevelColor() {
@@ -66,11 +73,13 @@ public class LeveledCreature {
         }
         JsonObject json = new JsonObject();
         json.addProperty("level", level);
-        json.addProperty("name", name);
+        if(name != null) {
+            json.addProperty("name", name);
+        }
         entity.addScoreboardTag(new Gson().toJson(json));
     }
 
     public String buildName() {
-        return getLevelColor() + "[Lv." + level + "] " + ChatColor.WHITE + name;
+        return getLevelColor() + "[Lv." + level + "] " + ChatColor.WHITE + getDisplayName();
     }
 }

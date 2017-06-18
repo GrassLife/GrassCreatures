@@ -1,13 +1,20 @@
 package life.grass.grasscreatures.listener;
 
+import life.grass.grasscreatures.boss.MiniBoss;
 import life.grass.grasscreatures.creature.LevelRange;
 import life.grass.grasscreatures.creature.LeveledCreature;
+import life.grass.grasscreatures.timer.MiniBossTimer;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Set;
 
 /**
  * Created by ecila on 2017/06/18.
@@ -23,6 +30,24 @@ public class SpawnListener implements Listener {
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent e) {
         LivingEntity entity = e.getEntity();
-        entity = LeveledCreature.generate(e.getEntity(), LevelRange.NORMAL).getEntity();
+        if(entity.getType().equals(EntityType.IRON_GOLEM)) {
+            entity = LeveledCreature.generate(entity, LevelRange.MINI_BOSS, "ためしのボスだよ").getEntity();
+            MiniBoss boss = new MiniBoss(entity);
+            MiniBossTimer.add(boss);
+        } else {
+            entity = LeveledCreature.generate(e.getEntity(), LevelRange.NORMAL).getEntity();
+        }
+    }
+
+    @EventHandler
+    public void test(EntityDamageByEntityEvent e) {
+        if(e.getDamager() instanceof Player && e.getEntity() instanceof LivingEntity) {
+            Player player = (Player) e.getDamager();
+            Set<String> tags = e.getEntity().getScoreboardTags();
+            for(String str: tags) {
+                player.sendMessage(str);
+            }
+            player.sendMessage(((LivingEntity)e.getEntity()).getHealth() + "/" + ((LivingEntity)e.getEntity()).getMaxHealth() );
+        }
     }
 }
