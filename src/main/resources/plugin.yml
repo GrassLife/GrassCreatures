@@ -1,3 +1,4 @@
 name: GrassCreatures
 version: ${project.version}
 main: life.grass.grasscreatures.GrassCreatures
+depend: [GrassItem]
