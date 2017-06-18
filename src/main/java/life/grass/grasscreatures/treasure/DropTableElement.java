@@ -6,6 +6,8 @@ package life.grass.grasscreatures.treasure;
 public class DropTableElement {
     private String loostListName;
     private double chance;
+    private int minLevel;
+    private int maxLevel;
 
     public String getLoostListName() {
         return loostListName;
@@ -21,5 +23,21 @@ public class DropTableElement {
 
     public void setChance(double chance) {
         this.chance = chance;
+    }
+
+    public int getMinLevel() {
+        return minLevel;
+    }
+
+    public void setMinLevel(int minLevel) {
+        this.minLevel = minLevel;
+    }
+
+    public int getMaxLevel() {
+        return maxLevel;
+    }
+
+    public void setMaxLevel(int maxLevel) {
+        this.maxLevel = maxLevel;
     }
 }

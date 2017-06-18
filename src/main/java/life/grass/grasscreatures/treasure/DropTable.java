@@ -1,5 +1,8 @@
 package life.grass.grasscreatures.treasure;
 
+import org.bukkit.inventory.ItemStack;
+
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,4 +36,15 @@ public class DropTable {
     public void setTables(List<DropTableElement> tables) {
         this.tables = tables;
     }
+
+    public List<ItemStack> getDropItems(int level) {
+        List<ItemStack> list = new ArrayList<>();
+        for(DropTableElement elem: tables) {
+            if(level >= elem.getMinLevel() && level <= elem.getMaxLevel() && Math.random() <= elem.getChance()) {
+                list.add(TreasureHolder.getLootList(elem.getLoostListName()).getDropItem());
+            }
+        }
+        return list;
+    }
+
 }

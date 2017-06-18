@@ -1,5 +1,6 @@
 package life.grass.grasscreatures.utils;
 
+import java.util.List;
 import java.util.Random;
 
 /**
@@ -9,5 +10,19 @@ public class RandomUtil {
     public static int generateRand(int min, int max) {
         Random rand = new Random();
         return min == max ? min : rand.nextInt(max - min) + min;
+    }
+
+    public static int getRandomIndexByWeight(List<Integer> weight) {
+        int sum = weight.stream().mapToInt(x -> x).sum();
+        int rand = generateRand(0, sum);
+        int index = -1;
+        for(int i = 0; i < weight.size(); i++) {
+            if(weight.get(i) > rand) {
+                index = i;
+                break;
+            }
+            rand -= weight.get(i);
+        }
+        return index;
     }
 }
