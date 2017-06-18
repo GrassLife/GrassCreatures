@@ -1,4 +1,4 @@
-package life.grass.grasscreatures.util;
+package life.grass.grasscreatures.utils;
 
 import java.util.Random;
 

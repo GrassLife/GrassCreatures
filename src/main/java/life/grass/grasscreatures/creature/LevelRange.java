@@ -1,8 +1,6 @@
 package life.grass.grasscreatures.creature;
 
-import life.grass.grasscreatures.util.RandomUtil;
-
-import java.util.Random;
+import life.grass.grasscreatures.utils.RandomUtil;
 
 /**
  * Created by ecila on 2017/06/18.
