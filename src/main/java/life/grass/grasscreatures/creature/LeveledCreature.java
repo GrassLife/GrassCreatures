@@ -2,10 +2,8 @@ package life.grass.grasscreatures.creature;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import net.minecraft.server.v1_12_R1.EntityLiving;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
-import org.bukkit.craftbukkit.v1_12_R1.entity.CraftLivingEntity;
 import org.bukkit.entity.LivingEntity;
 
 /**
@@ -49,9 +47,9 @@ public class LeveledCreature {
     public ChatColor getLevelColor() {
         if(level >= 10) {
             return ChatColor.GOLD;
-        } else if(level > 5) {
+        } else if(level >= 5) {
             return ChatColor.YELLOW;
-        } else if(level > 3) {
+        } else if(level >= 3) {
             return ChatColor.GRAY;
         } else {
             return ChatColor.DARK_GRAY;
