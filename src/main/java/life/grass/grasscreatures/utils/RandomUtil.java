@@ -9,7 +9,7 @@ import java.util.Random;
 public class RandomUtil {
     public static int generateRand(int min, int max) {
         Random rand = new Random();
-        return min == max ? min : rand.nextInt(max - min) + min;
+        return min == max ? min : rand.nextInt(max - min + 1) + min;
     }
 
     public static int getRandomIndexByWeight(List<Integer> weight) {
