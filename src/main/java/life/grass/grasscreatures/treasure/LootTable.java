@@ -33,7 +33,11 @@ public class LootTable {
     }
 
     public ItemStack getDropItem() {
-        return ItemBuilder.buildByConfigString(getDropItemName());
+        int index = RandomUtil.getRandomIndexByWeight(getLootWeightArray());
+        LootTableElement element = list.get(index);
+        ItemStack item = ItemBuilder.buildByConfigString(element.getItemName());
+        item.setAmount(RandomUtil.generateRand(element.getMinCount(), element.getMaxCount()));
+        return item;
     }
 
     public String getDropItemName() {
