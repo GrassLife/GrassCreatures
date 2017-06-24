@@ -30,14 +30,13 @@ public class SpawnListener implements Listener {
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent e) {
         LivingEntity entity = e.getEntity();
-        if(entity.getType().equals(EntityType.IRON_GOLEM)) {
-            entity = LeveledCreature.generate(entity, LevelRange.MINI_BOSS, "ためしのボスだよ").getEntity();
-            entity.setGlowing(true);
-            MiniBoss boss = new MiniBoss(entity);
-            MiniBossTimer.add(boss);
-        } else {
+//        if(entity.getType().equals(EntityType.IRON_GOLEM)) {
+//            entity = LeveledCreature.generate(entity, LevelRange.MINI_BOSS, "ためしのボスだよ").getEntity();
+//            entity.setGlowing(true);
+//            MiniBoss boss = new MiniBoss(entity);
+//            MiniBossTimer.add(boss);
+//        } else {
             entity = LeveledCreature.generate(e.getEntity(), LevelRange.NORMAL).getEntity();
-            
-        }
+//        }
     }
 }
