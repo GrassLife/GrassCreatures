@@ -36,7 +36,8 @@ public class LootTable {
     public ItemStack getDropItem() {
         int index = RandomUtil.getRandomIndexByWeight(getLootWeightArray());
         LootTableElement element = list.get(index);
-        ItemStack item = ItemBuilder.buildByConfigString(element.getItemName().replaceAll("%12hour%", LocalDateTime.now().plusHours(12).toString()));
+        String timedName = element.getItemName().replaceAll("%12hour%", LocalDateTime.now().plusHours(12).toString());
+        ItemStack item = ItemBuilder.buildByConfigString(timedName);
         item.setAmount(RandomUtil.generateRand(element.getMinCount(), element.getMaxCount()));
         return item;
     }
