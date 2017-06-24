@@ -1,6 +1,7 @@
 package life.grass.grasscreatures.treasure;
 
 import life.grass.grasscreatures.utils.RandomUtil;
+import life.grass.grassitem.ItemBuilder;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.ArrayList;
@@ -32,7 +33,7 @@ public class LootTable {
     }
 
     public ItemStack getDropItem() {
-        return null;
+        return ItemBuilder.buildByConfigString(getDropItemName());
     }
 
     public String getDropItemName() {

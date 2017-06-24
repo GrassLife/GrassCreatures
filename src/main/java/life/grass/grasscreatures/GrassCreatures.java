@@ -1,5 +1,6 @@
 package life.grass.grasscreatures;
 
+import life.grass.grasscreatures.listener.DropListener;
 import life.grass.grasscreatures.listener.SpawnListener;
 import life.grass.grasscreatures.loader.TreasureLoader;
 import life.grass.grasscreatures.timer.MiniBossTimer;
@@ -23,6 +24,7 @@ public final class GrassCreatures extends JavaPlugin {
         File lootTablePath = new File(getDataFolder(), "./LootTables/");
         instance = this;
         SpawnListener spawnListener = new SpawnListener(pluginManager, this);
+        DropListener dropListener = new DropListener(pluginManager, this);
         this.getServer().getScheduler().runTaskTimer(this, new MiniBossTimer(), 0, 20);
         TreasureLoader.loadLoots(lootTablePath);
         TreasureLoader.loadDrops(dropTablePath);

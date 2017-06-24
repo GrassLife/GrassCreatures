@@ -41,7 +41,7 @@ public class DropTable {
         List<ItemStack> list = new ArrayList<>();
         for(DropTableElement elem: tables) {
             if(level >= elem.getMinLevel() && level <= elem.getMaxLevel() && Math.random() <= elem.getChance()) {
-                list.add(TreasureHolder.getLootList(elem.getLoostListName()).getDropItem());
+                list.add(TreasureHolder.getLootList(elem.getLootListName()).getDropItem());
             }
         }
         return list;

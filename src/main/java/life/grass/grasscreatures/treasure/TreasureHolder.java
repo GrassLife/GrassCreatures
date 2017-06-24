@@ -9,19 +9,26 @@ public class TreasureHolder {
     private static HashMap<String, DropTable> dropTables;
     private static HashMap<String, LootTable> lootTables;
 
+    static {
+        dropTables = new HashMap<>();
+        lootTables = new HashMap<>();
+    }
+
     public static DropTable getDropTable(String key) {
-        return dropTables.containsKey(key) ? dropTables.get(key) : null;
+        return dropTables.get(key);
     }
 
     public static LootTable getLootList(String key) {
-        return lootTables.containsKey(key) ? lootTables.get(key) : null;
+        return lootTables.get(key);
     }
 
     public static void putDropTable(DropTable table) {
+        System.out.println("DROP TABLE LOAD : " + table.getTableName());
         dropTables.put(table.getTableName(), table);
     }
 
     public static void putLootTable(LootTable table) {
+        System.out.println("LOOT TABLE LOAD : " + table.getLootTableName());
         lootTables.put(table.getLootTableName(), table);
     }
 }

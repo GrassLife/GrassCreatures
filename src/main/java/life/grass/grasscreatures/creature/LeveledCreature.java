@@ -65,18 +65,16 @@ public class LeveledCreature {
 
     private void setupEntity() {
         entity.setCanPickupItems(false);
-        entity.setCustomName(buildName());
         entity.setMaxHealth(entity.getMaxHealth() + 3.0 * (level - 1));
         entity.setHealth(entity.getMaxHealth());
         if(entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE) != null) {
             entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).setBaseValue(entity.getAttribute(Attribute.GENERIC_ATTACK_DAMAGE).getValue() + (level - 1) / 4);
         }
         JsonObject json = new JsonObject();
-        json.addProperty("level", level);
-        if(name != null) {
-            json.addProperty("name", name);
-        }
+        json.addProperty("Level", level);
+        json.addProperty("CustomName", name != null ? name : entity.getName());
         entity.addScoreboardTag(new Gson().toJson(json));
+        entity.setCustomName(buildName());
     }
 
     public String buildName() {

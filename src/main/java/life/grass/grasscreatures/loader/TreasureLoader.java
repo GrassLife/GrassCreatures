@@ -21,6 +21,7 @@ import java.util.logging.Logger;
 public class TreasureLoader {
     public static void loadDrops(File dir) {
         Gson gson = new Gson();
+        if(!dir.exists()) dir.mkdirs();
         for(File file: dir.listFiles()) {
             try {
                 Type type = new TypeToken<Collection<DropTable>>(){}.getType();
@@ -37,6 +38,7 @@ public class TreasureLoader {
 
     public static void loadLoots(File dir) {
         Gson gson = new Gson();
+        if(!dir.exists()) dir.mkdirs();
         for(File file: dir.listFiles()) {
             try {
                 Type type = new TypeToken<Collection<LootTable>>(){}.getType();

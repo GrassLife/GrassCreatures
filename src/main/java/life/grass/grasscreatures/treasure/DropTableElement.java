@@ -4,21 +4,21 @@ package life.grass.grasscreatures.treasure;
  * Created by ecila on 2017/06/18.
  */
 public class DropTableElement {
-    private String loostListName;
+    private String lootListName;
     private double chance;
     private int minLevel;
     private int maxLevel;
 
-    public String getLoostListName() {
-        return loostListName;
+    public String getLootListName() {
+        return lootListName;
     }
 
     public double getChance() {
         return chance;
     }
 
-    public void setLoostListName(String loostListName) {
-        this.loostListName = loostListName;
+    public void setLootListName(String lootListName) {
+        this.lootListName = lootListName;
     }
 
     public void setChance(double chance) {

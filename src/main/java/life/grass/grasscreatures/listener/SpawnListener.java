@@ -40,16 +40,4 @@ public class SpawnListener implements Listener {
             
         }
     }
-
-    @EventHandler
-    public void test(EntityDamageByEntityEvent e) {
-        if(e.getDamager() instanceof Player && e.getEntity() instanceof LivingEntity) {
-            Player player = (Player) e.getDamager();
-            Set<String> tags = e.getEntity().getScoreboardTags();
-            for(String str: tags) {
-                player.sendMessage(str);
-            }
-            player.sendMessage(((LivingEntity)e.getEntity()).getHealth() + "/" + ((LivingEntity)e.getEntity()).getMaxHealth() );
-        }
-    }
 }
