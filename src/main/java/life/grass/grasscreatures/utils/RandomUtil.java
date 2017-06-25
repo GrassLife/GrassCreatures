@@ -15,7 +15,7 @@ public class RandomUtil {
     public static int getRandomIndexByWeight(List<Integer> weight) {
         int sum = weight.stream().mapToInt(x -> x).sum();
         int rand = generateRand(0, sum);
-        int index = -1;
+        int index = 0;
         for(int i = 0; i < weight.size(); i++) {
             if(weight.get(i) > rand) {
                 index = i;
