@@ -5,14 +5,19 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import life.grass.grasscreatures.treasure.DropTable;
 import life.grass.grasscreatures.treasure.TreasureHolder;
+import life.grass.grassitem.GrassJson;
+import life.grass.grassitem.JsonHandler;
+import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
+import org.bukkit.event.entity.EntitySpawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -45,6 +50,20 @@ public class DropListener implements Listener {
         DropTable table = TreasureHolder.getDropTable(name);
         if(table != null) {
             items.addAll(table.getDropItems(level));
+        }
+    }
+
+    @EventHandler
+    public void onDropItems(EntitySpawnEvent e) {
+        if(e.getEntity() instanceof Item) {
+            Item drop = (Item) e.getEntity();
+            ItemStack item = drop.getItemStack();
+            GrassJson json = JsonHandler.getGrassJson(item);
+            if(json == null) return;
+            if(!json.hasDynamicValueInItem("ExpireDate") && json.hasItemTag("Ingredient")) {
+                item = JsonHandler.putExpireDateHours(item, 12);
+                drop.setItemStack(item);
+            }
         }
     }
 }
