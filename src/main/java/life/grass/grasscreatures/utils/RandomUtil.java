@@ -25,4 +25,8 @@ public class RandomUtil {
         }
         return index;
     }
+
+    public static boolean isPassed(double chance) {
+        return chance >= Math.random();
+    }
 }

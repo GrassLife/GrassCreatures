@@ -32,6 +32,10 @@ public class MiniBossTimer implements Runnable {
         }
     }
 
+    public static int count() {
+        return bossList.size();
+    }
+
     public static boolean add(MiniBoss boss) {
         if(bossList.size() >= 10) return false;
         return bossList.add(boss);
