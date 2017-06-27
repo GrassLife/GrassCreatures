@@ -78,6 +78,6 @@ public class LeveledCreature {
     }
 
     public String buildName() {
-        return getLevelColor() + "[Lv." + level + "] " + ChatColor.WHITE + getDisplayName();
+        return getDisplayName().startsWith("[") ? getDisplayName() : getLevelColor() + "[Lv." + level + "] " + ChatColor.WHITE + getDisplayName();
     }
 }
