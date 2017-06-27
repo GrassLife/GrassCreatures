@@ -9,6 +9,7 @@ import life.grass.grassitem.GrassJson;
 import life.grass.grassitem.JsonHandler;
 import org.bukkit.entity.Item;
 import org.bukkit.entity.LivingEntity;
+import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDeathEvent;
@@ -37,6 +38,7 @@ public class DropListener implements Listener {
     public void onLivingEntityDeath(EntityDeathEvent e) {
         LivingEntity entity = e.getEntity();
         e.setDroppedExp(0);
+        if(e.getEntity() instanceof Player) return;
         List<ItemStack> items = e.getDrops();
         items.clear();
         String jsonString = entity.getScoreboardTags().stream().filter(s -> s.startsWith("{")).findFirst().orElse(null);
