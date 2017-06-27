@@ -72,12 +72,12 @@ public class LeveledCreature {
         }
         JsonObject json = new JsonObject();
         json.addProperty("Level", level);
-        json.addProperty("CustomName", name != null ? name : entity.getName());
+        json.addProperty("CustomName", name != null ? name : getDisplayName());
         entity.addScoreboardTag(new Gson().toJson(json));
         entity.setCustomName(buildName());
     }
 
     public String buildName() {
-        return getDisplayName().startsWith("[") ? getDisplayName() : getLevelColor() + "[Lv." + level + "] " + ChatColor.WHITE + getDisplayName();
+        return getDisplayName().startsWith("§") ? getDisplayName() : getLevelColor() + "[Lv." + level + "] " + ChatColor.WHITE + getDisplayName();
     }
 }
