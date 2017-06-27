@@ -4,6 +4,7 @@ import life.grass.grasscreatures.utils.RandomUtil;
 import life.grass.grassitem.ItemBuilder;
 import org.bukkit.inventory.ItemStack;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
@@ -37,6 +38,7 @@ public class LootTable {
         int index = RandomUtil.getRandomIndexByWeight(getLootWeightArray());
         LootTableElement element = list.get(index);
         String timedName = element.getItemName().replaceAll("%12hour%", LocalDateTime.now().plusHours(12).toString());
+        timedName = timedName.replaceAll("%now%", LocalDateTime.now().toString());
         ItemStack item = ItemBuilder.buildByConfigString(timedName);
         item.setAmount(RandomUtil.generateRand(element.getMinCount(), element.getMaxCount()));
         return item;
