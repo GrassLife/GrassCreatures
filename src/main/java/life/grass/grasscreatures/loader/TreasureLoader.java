@@ -24,6 +24,8 @@ public class TreasureLoader {
         if(!dir.exists()) dir.mkdirs();
         for(File file: dir.listFiles()) {
             try {
+                System.out.println(file.getName());
+                if(!file.getName().endsWith(".json")) break;
                 Type type = new TypeToken<Collection<DropTable>>(){}.getType();
                 JsonReader reader = new JsonReader(new FileReader(file));
                 List<DropTable> tables = gson.fromJson(reader, type);
@@ -41,6 +43,8 @@ public class TreasureLoader {
         if(!dir.exists()) dir.mkdirs();
         for(File file: dir.listFiles()) {
             try {
+                System.out.println(file.getName());
+                if(!file.getName().endsWith(".json")) break;
                 Type type = new TypeToken<Collection<LootTable>>(){}.getType();
                 JsonReader reader = new JsonReader(new FileReader(file));
                 List<LootTable> tables = gson.fromJson(reader, type);
