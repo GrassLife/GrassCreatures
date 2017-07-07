@@ -1,5 +1,7 @@
 package life.grass.grasscreatures;
 
+import com.comphenix.protocol.ProtocolLibrary;
+import com.comphenix.protocol.ProtocolManager;
 import life.grass.grasscreatures.listener.DropListener;
 import life.grass.grasscreatures.listener.SpawnListener;
 import life.grass.grasscreatures.loader.TreasureLoader;
@@ -12,6 +14,7 @@ import java.io.File;
 public final class GrassCreatures extends JavaPlugin {
     private final PluginManager pluginManager = this.getServer().getPluginManager();
     private static JavaPlugin instance;
+    private static ProtocolManager protocolManager;
 
 
     @Override
@@ -25,6 +28,10 @@ public final class GrassCreatures extends JavaPlugin {
         instance = this;
         SpawnListener spawnListener = new SpawnListener(pluginManager, this);
         DropListener dropListener = new DropListener(pluginManager, this);
+
+        protocolManager = ProtocolLibrary.getProtocolManager();
+        EntityRewriter.getInstance().addListener(protocolManager, this);
+
         this.getServer().getScheduler().runTaskTimer(this, new MiniBossTimer(), 0, 20);
         TreasureLoader.loadLoots(lootTablePath);
         TreasureLoader.loadDrops(dropTablePath);

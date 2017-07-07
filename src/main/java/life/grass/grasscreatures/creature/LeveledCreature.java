@@ -1,6 +1,7 @@
 package life.grass.grasscreatures.creature;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import org.bukkit.ChatColor;
 import org.bukkit.attribute.Attribute;
@@ -13,6 +14,22 @@ public class LeveledCreature {
     private LivingEntity entity;
     private int level;
     private String name;
+    private static Gson gson;
+
+    static {
+        gson = new Gson();
+    }
+
+    public LeveledCreature(LivingEntity entity) {
+        this.entity = entity;
+        String jsonString = entity.getScoreboardTags().stream().filter(s -> s.startsWith("{")).findFirst().orElse(null);
+        level = 0;
+        if(jsonString != null) {
+            JsonObject json = gson.fromJson(jsonString, JsonElement.class).getAsJsonObject();
+            if(json.get("CustomName") != null) name = json.get("CustomName").getAsString();
+            if(json.get("Level") != null) level = json.get("Level").getAsInt();
+        }
+    }
 
     private LeveledCreature(LivingEntity entity, int level) {
         this.entity = entity;
@@ -74,10 +91,10 @@ public class LeveledCreature {
         json.addProperty("Level", level);
         json.addProperty("CustomName", name != null ? name : getDisplayName());
         entity.addScoreboardTag(new Gson().toJson(json));
-        entity.setCustomName(buildName());
+//        entity.setCustomName(buildName());
     }
 
     public String buildName() {
-        return getDisplayName().startsWith("§") ? getDisplayName() : getLevelColor() + "[Lv." + level + "] " + ChatColor.WHITE + getDisplayName();
+        return getLevelColor() + "[Lv." + level + "] " + ChatColor.WHITE + name;
     }
 }

@@ -1,6 +1,7 @@
 package life.grass.grasscreatures.boss;
 
 import life.grass.grasscreatures.GrassCreatures;
+import life.grass.grasscreatures.creature.LeveledCreature;
 import org.bukkit.Server;
 import org.bukkit.boss.BarColor;
 import org.bukkit.boss.BarStyle;
@@ -15,11 +16,13 @@ import org.bukkit.entity.Player;
 public class MiniBoss {
     private BossBar bar;
     private LivingEntity entity;
+    private LeveledCreature leveledCreature;
     private boolean finished = false;
 
     public MiniBoss(LivingEntity entity) {
         this.entity = entity;
-        this.bar = GrassCreatures.getInstance().getServer().createBossBar(entity.getCustomName(), BarColor.YELLOW, BarStyle.SEGMENTED_10);
+        this.leveledCreature = new LeveledCreature(entity);
+        this.bar = GrassCreatures.getInstance().getServer().createBossBar(leveledCreature.getDisplayName(), BarColor.YELLOW, BarStyle.SEGMENTED_10);
         bar.setProgress(1.0);
     }
 
