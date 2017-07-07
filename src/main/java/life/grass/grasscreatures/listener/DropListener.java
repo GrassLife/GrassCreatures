@@ -54,18 +54,4 @@ public class DropListener implements Listener {
             items.addAll(table.getDropItems(level));
         }
     }
-
-    @EventHandler
-    public void onDropItems(EntitySpawnEvent e) {
-        if(e.getEntity() instanceof Item) {
-            Item drop = (Item) e.getEntity();
-            ItemStack item = drop.getItemStack();
-            GrassJson json = JsonHandler.getGrassJson(item);
-            if(json == null) return;
-            if(!json.hasDynamicValueInItem("ExpireDate") && json.hasItemTag("Ingredient")) {
-                item = JsonHandler.putExpireDateHours(item, 12);
-                drop.setItemStack(item);
-            }
-        }
-    }
 }
