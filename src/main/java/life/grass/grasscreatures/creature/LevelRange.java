@@ -7,7 +7,7 @@ import life.grass.grasscreatures.utils.RandomUtil;
  */
 public enum LevelRange {
     NORMAL(1, 5),
-    MINI_BOSS(10, 10);
+    MINI_BOSS(20, 20);
 
     private int min;
     private int max;
