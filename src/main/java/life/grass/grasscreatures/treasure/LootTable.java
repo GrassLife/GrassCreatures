@@ -6,6 +6,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -37,8 +38,8 @@ public class LootTable {
     public ItemStack getDropItem() {
         int index = RandomUtil.getRandomIndexByWeight(getLootWeightArray());
         LootTableElement element = list.get(index);
-        String timedName = element.getItemName().replaceAll("%12hour%", LocalDateTime.now().plusHours(12).toString());
-        timedName = timedName.replaceAll("%now%", LocalDateTime.now().toString());
+        String timedName = element.getItemName();
+        timedName = replaceExpireDate(timedName);
         ItemStack item = ItemBuilder.buildByConfigString(timedName);
         item.setAmount(RandomUtil.generateRand(element.getMinCount(), element.getMaxCount()));
         return item;
@@ -56,5 +57,16 @@ public class LootTable {
             weightArray = array;
             return array;
         }
+    }
+
+    private String replaceExpireDate(String settings) {
+        String formatted = settings.replaceAll("%now%", getRoundedExpireDate(0));
+        formatted = formatted.replaceAll("%12hour%", getRoundedExpireDate(12));
+        return formatted;
+    }
+
+    private String getRoundedExpireDate(int hours) {
+        LocalDateTime time = LocalDateTime.now();
+        return time.plusHours(hours).minusMinutes(time.getMinute() % 10).truncatedTo(ChronoUnit.MINUTES).toString();
     }
 }
