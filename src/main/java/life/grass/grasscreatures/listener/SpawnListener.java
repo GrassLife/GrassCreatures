@@ -5,6 +5,7 @@ import life.grass.grasscreatures.creature.LevelRange;
 import life.grass.grasscreatures.creature.LeveledCreature;
 import life.grass.grasscreatures.timer.MiniBossTimer;
 import life.grass.grasscreatures.utils.RandomUtil;
+import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -31,8 +32,9 @@ public class SpawnListener implements Listener {
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent e) {
         LivingEntity entity = e.getEntity();
-        if(entity.getType().equals(EntityType.WITCH) && RandomUtil.isPassed(0.1) && MiniBossTimer.count() <= 10) {
+        if(entity.getType().equals(EntityType.WITCH) && entity.getLocation().getBlockY() > 63 && RandomUtil.isPassed(0.2) && MiniBossTimer.count() <= 10) {
             entity = LeveledCreature.generate(entity, LevelRange.MINI_BOSS, "Wizard").getEntity();
+            entity.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(1.0);
             entity.setGlowing(true);
             MiniBoss boss = new MiniBoss(entity);
             MiniBossTimer.add(boss);
