@@ -32,7 +32,18 @@ public class SpawnListener implements Listener {
     @EventHandler
     public void onCreatureSpawn(CreatureSpawnEvent e) {
         LivingEntity entity = e.getEntity();
-        if(entity.getType().equals(EntityType.WITCH) && entity.getLocation().getBlockY() > 63 && RandomUtil.isPassed(0.2) && MiniBossTimer.count() <= 10) {
+        if(e.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.NATURAL)) {
+            if(!e.getEntity().getLocation().getBlock().getRelative(0, 2, 0).getType().equals(Material.AIR)) {
+                e.setCancelled(true);
+                return;
+            }
+        }
+
+        if(e.getSpawnReason().equals(CreatureSpawnEvent.SpawnReason.DEFAULT)) {
+            e.setCancelled(true);
+            return;
+        }
+        if(entity.getType().equals(EntityType.WITCH) && entity.getLocation().getBlockY() > 63 && RandomUtil.isPassed(1.0) && MiniBossTimer.count() <= 10) {
             entity = LeveledCreature.generate(entity, LevelRange.MINI_BOSS, "Wizard").getEntity();
             entity.getAttribute(Attribute.GENERIC_KNOCKBACK_RESISTANCE).setBaseValue(1.0);
             entity.setGlowing(true);
