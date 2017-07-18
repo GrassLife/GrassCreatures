@@ -3,6 +3,7 @@ package life.grass.grasscreatures.listener;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import life.grass.grasscombat.entity.Victim;
 import life.grass.grasscreatures.treasure.DropTable;
 import life.grass.grasscreatures.treasure.TreasureHolder;
 import life.grass.grassitem.GrassJson;
@@ -41,9 +42,13 @@ public class DropListener implements Listener {
         if(e.getEntity() instanceof Player) return;
         List<ItemStack> items = e.getDrops();
         items.clear();
+
+        Victim victim = new Victim(entity);
+        if(!victim.isDroppable()) return;
         String jsonString = entity.getScoreboardTags().stream().filter(s -> s.startsWith("{")).findFirst().orElse(null);
         String name = entity.getCustomName();
         int level = 1;
+
         if(jsonString != null) {
             JsonObject json = gson.fromJson(jsonString, JsonElement.class).getAsJsonObject();
             if(json.get("CustomName") != null) name = json.get("CustomName").getAsString();
