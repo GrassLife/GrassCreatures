@@ -33,7 +33,7 @@ public class TreasureLoader {
                     TreasureHolder.putDropTable(table);
                 }
             } catch(FileNotFoundException ex) {
-                Logger.getLogger("読み込みエラー: " + file.getName());
+                System.out.println("読み込みエラー: " + file.getName());
             }
         }
     }
@@ -52,7 +52,7 @@ public class TreasureLoader {
                     TreasureHolder.putLootTable(table);
                 }
             } catch(FileNotFoundException ex) {
-                Logger.getLogger("読み込みエラー: " + file.getName());
+                System.out.println("読み込みエラー: " + file.getName());
             }
         }
     }

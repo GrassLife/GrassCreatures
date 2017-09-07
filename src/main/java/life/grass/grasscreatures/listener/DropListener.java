@@ -38,7 +38,7 @@ public class DropListener implements Listener {
     @EventHandler
     public void onLivingEntityDeath(EntityDeathEvent e) {
         LivingEntity entity = e.getEntity();
-        e.setDroppedExp(0);
+        e.setDroppedExp(3);
         if(e.getEntity() instanceof Player) return;
         List<ItemStack> items = e.getDrops();
         items.clear();

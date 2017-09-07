@@ -5,6 +5,7 @@ import life.grass.grasscreatures.creature.LevelRange;
 import life.grass.grasscreatures.creature.LeveledCreature;
 import life.grass.grasscreatures.timer.MiniBossTimer;
 import life.grass.grasscreatures.utils.RandomUtil;
+import org.bukkit.Material;
 import org.bukkit.attribute.Attribute;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
