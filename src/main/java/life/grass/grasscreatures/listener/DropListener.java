@@ -38,13 +38,13 @@ public class DropListener implements Listener {
     @EventHandler
     public void onLivingEntityDeath(EntityDeathEvent e) {
         LivingEntity entity = e.getEntity();
-        e.setDroppedExp(3);
         if(e.getEntity() instanceof Player) return;
         List<ItemStack> items = e.getDrops();
         items.clear();
 
         Victim victim = new Victim(entity);
         if(!victim.isDroppable()) return;
+        e.setDroppedExp(3);
         String jsonString = entity.getScoreboardTags().stream().filter(s -> s.startsWith("{")).findFirst().orElse(null);
         String name = entity.getCustomName();
         int level = 1;
